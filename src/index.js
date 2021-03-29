@@ -1,4 +1,5 @@
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, createStore, compose } from 'redux'
+import {composeWhithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import { asyncIncrement, changeTheme, decrement, increment } from './redux/actions'
@@ -11,10 +12,21 @@ const subBtn = document.getElementById('sub')
 const asyncBtn = document.getElementById('async')
 const themeBtn = document.getElementById('theme')
 //0 это начальное состояние
+
+// redux devtools через фунцию compose 
 const store = createStore(
   rootReducer, 
-  applyMiddleware(thunk,logger)
-  )
+  compose(
+applyMiddleware(thunk,logger),
+window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+))
+//redux dev tools через установку библиотеки
+// const store = createStore(
+//   rootReducer, 
+//   composeWhithDevTools(
+// applyMiddleware(thunk,logger)
+
+// ))
 ///можно в консоли посмтреть state
 //window.store = store
 
