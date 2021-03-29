@@ -1,4 +1,4 @@
-import { DECREMENT, INCREMENT } from "./types";
+import { CHANGETHEME, DECREMENT, INCREMENT } from "./types";
 
 //actionCreater  это функции которые создают action
 export function increment(){
@@ -9,6 +9,14 @@ export function increment(){
 export function decrement(){
   return{
     type: DECREMENT
+  }
+}
+
+export function changeTheme(newTheme){
+  return{ 
+    type: CHANGETHEME, 
+    payload: newTheme
+
   }
 }
 export function asyncIncrement(){
