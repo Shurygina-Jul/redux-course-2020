@@ -1,7 +1,7 @@
 //3 базовых метода,паттерн наблюдатель
 export function createStore(rootReducer, initialState){
   //то что внутр самой функции приватно
-  let state = rootReducer(initialState, {type: '__INIT'})
+  let state = rootReducer(initialState, {type: '__INIT__'})
   //слушатели событий
   const subscribers = []
   
@@ -21,4 +21,4 @@ export function createStore(rootReducer, initialState){
       return state
     }
   }
-}
+} 

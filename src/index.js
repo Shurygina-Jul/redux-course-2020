@@ -23,14 +23,14 @@ subBtn.addEventListener('click', () =>{
 })
 //через 2 секунды счетчик увеличивается на 1
 asyncBtn.addEventListener('click', () =>{
-  setTimeout(()=>{
-    state++
-    render()
-  },2000 )
- 
+
 })
 
-   
+  store.subscribe(()=>{
+    const state = store.getState()
+    counter.textContent =state
+  }) 
+  store.dispatch({type:'INIT_APP'})
 //смена темы на dark
 // themeBtn.addEventListener('click', () =>{
 //   document.body.classList.toggle('dark')
