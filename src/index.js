@@ -1,4 +1,6 @@
-import { createStore } from './createStore'
+import { applyMiddleware, createStore } from 'redux'
+import thunk from 'redux-thunk'
+import { asyncIncrement, decrement, increment } from './redux/actions'
 import { rootReducer } from './redux/rootReducer'
 import './styles.css'
 
@@ -8,22 +10,25 @@ const subBtn = document.getElementById('sub')
 const asyncBtn = document.getElementById('async')
 const themeBtn = document.getElementById('theme')
 //0 это начальное состояние
-const store = createStore(rootReducer, 0)
+const store = createStore(
+  rootReducer, 
+  0, 
+  applyMiddleware(thunk))
 ///можно в консоли посмтреть state
 //window.store = store
 
 //если произошел клик, меняем модель напрямую и рендерим 
 addBtn.addEventListener('click', () =>{
-  store.dispatch({type:'INCREMENT'})
+  store.dispatch(increment())
  
 })
 
 subBtn.addEventListener('click', () =>{
-  store.dispatch({type:'DECREMENT'})
+  store.dispatch(decrement())
 })
 //через 2 секунды счетчик увеличивается на 1
 asyncBtn.addEventListener('click', () =>{
-
+ store.dispatch(asyncIncrement())
 })
 
   store.subscribe(()=>{
